@@ -29,12 +29,14 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 	
+	//Buscar categoria por id //
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
+	// Inserir uma nova categoria //
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
@@ -45,6 +47,8 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	
+	//Update de uma categoria //
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
@@ -54,6 +58,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	//Deletar de uma categoria//
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
@@ -61,6 +66,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	// List todas as categorias//
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		List<Categoria> list = service.findAll();
@@ -68,6 +74,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	// Paginação das categoria//
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
