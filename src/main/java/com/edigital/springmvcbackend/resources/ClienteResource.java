@@ -54,7 +54,7 @@ public class ClienteResource {
 		return ResponseEntity.created(uri).build();
 	}
 
-	// Update de uma categoria //
+	// Update de uma cliente //
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
 		Cliente obj = service.fromDTO(objDto);
